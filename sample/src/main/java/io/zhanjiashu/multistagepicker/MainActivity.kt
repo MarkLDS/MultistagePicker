@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         val regionPicker = RegionPicker(this)
         regionPicker.setOnAddressPickSuccessListener { region ->
-            thirdTextView.text = "结果： ${region.province} - ${region.city} - ${region.district}"
+            thirdTextView.text = "结果： ${region.province} - ${region.city}"
             thirdBtn.tag = region
         }
         thirdBtn.setOnClickListener {

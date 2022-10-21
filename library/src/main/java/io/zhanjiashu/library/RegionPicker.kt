@@ -34,8 +34,7 @@ class RegionPicker private constructor(private val picker: MultistagePickerDialo
         picker.setOnPickCompletedListener { selectedOptions ->
             val region = Region (
                     selectedOptions[STAGE_KEY_PROVINCE] ?: "",
-                    selectedOptions[STAGE_KEY_CITY] ?: "",
-                    selectedOptions[STAGE_KEY_DISTRICT] ?: ""
+                    selectedOptions[STAGE_KEY_CITY] ?: ""
             )
             addressPickSuccessListener?.invoke(region)
         }
@@ -45,8 +44,7 @@ class RegionPicker private constructor(private val picker: MultistagePickerDialo
         region?.let {
             val options = mutableMapOf(
                     STAGE_KEY_PROVINCE to it.province,
-                    STAGE_KEY_CITY to it.city,
-                    STAGE_KEY_DISTRICT to it.district
+                    STAGE_KEY_CITY to it.city
             )
             picker.setPreselectedOptions(options)
         }
@@ -56,5 +54,5 @@ class RegionPicker private constructor(private val picker: MultistagePickerDialo
         addressPickSuccessListener = l
     }
 
-    data class Region(val province: String, val city: String, val district: String)
+    data class Region(val province: String, val city: String)
 }

@@ -18,7 +18,6 @@
 package io.zhanjiashu.library.provider
 
 import android.content.Context
-import android.util.Log
 import io.zhanjiashu.library.internal.RegionsXMLParserHandler
 import java.io.IOException
 import java.io.InputStream
@@ -26,7 +25,6 @@ import javax.xml.parsers.SAXParserFactory
 
 const val STAGE_KEY_PROVINCE = "Province"
 const val STAGE_KEY_CITY = "City"
-const val STAGE_KEY_DISTRICT = "District"
 
 class AddressPickerDataProvider(context: Context) : MultistagePickerDataProvider() {
 
@@ -63,7 +61,7 @@ class AddressPickerDataProvider(context: Context) : MultistagePickerDataProvider
         }
     }
 
-    private val keys = listOf(STAGE_KEY_PROVINCE, STAGE_KEY_CITY, STAGE_KEY_DISTRICT)
+    private val keys = listOf(STAGE_KEY_PROVINCE, STAGE_KEY_CITY)
 
     override fun stageKeys(): List<String> {
         return keys
@@ -74,8 +72,6 @@ class AddressPickerDataProvider(context: Context) : MultistagePickerDataProvider
             STAGE_KEY_PROVINCE -> "省"
 
             STAGE_KEY_CITY -> "城市"
-
-            STAGE_KEY_DISTRICT -> "区县"
 
             else -> "请选择"
         }
@@ -88,13 +84,6 @@ class AddressPickerDataProvider(context: Context) : MultistagePickerDataProvider
             STAGE_KEY_CITY -> {
                 val province = upperStageSelectedOptions[STAGE_KEY_PROVINCE]
                 mRegionData[province]?.keys?.toList() ?: emptyList()
-            }
-
-            STAGE_KEY_DISTRICT -> {
-                val province = upperStageSelectedOptions[STAGE_KEY_PROVINCE]
-                val city = upperStageSelectedOptions[STAGE_KEY_CITY]
-
-                mRegionData[province]?.get(city)
             }
 
             else -> emptyList()
